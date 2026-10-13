@@ -1,0 +1,59 @@
+1. Make sure User are to be Freezed and not Deactivated while in major Go-Live releases.
+2. Env File changes are in place and validated well in time.
+3. Backup of master branch is taken in Bitbucket as well as on local repository.
+4. Reports & Dashboards are retrieved from PROD before major Go-Live release as a backup.
+5. Jenkinsfile script vaerification.
+6. Confluence Backup is taken.
+7. Disable the Master branch synch from PROD Job.
+8. 
+
+
+
+
+
+
+
+
+User List where Users are active and what is last modified date.
+Select Id,Name, Username, Email, lastmodifiedby.Name from User where isActive = FALSE and LastmodifiedDate = TODAY
+
+
+User List where Users are Active and not freezed
+SELECT Id, Name, Username, Email, UserRole.Name, Profile.Name, LastLoginDate
+FROM User
+WHERE IsActive = TRUE
+AND Id IN (
+    SELECT UserId
+    FROM UserLogin
+    WHERE IsFrozen = FALSE
+)
+
+
+User List with specific Profiles and are active 
+Select Id,FirstName,lastName,UserName,Email,FederationIdentifier,IsActive,UserRole.Name,Profile.Name from User where isActive = TRUE and Profile.Name = 'System administrator'
+
+
+
+
+
+PSR Query - 
+
+SELECT Id,WorkItemId,CustomRequestedDateTime,c,WorkItem.RMG_SLA_Priority__c,WorkItem.RMG_EscalationTime__c,Serial,IsDeleted,WorkItem.CaseNumber,WorkItem.Owner.Type,WorkItem.Owner.Name,WorkItem.RMG_CaseEscalated__c,WorkItem.CreatedDate, RoutingType,RoutingModel,IsReadyForRouting from PendingServiceRouting WHERE RoutingType ='SkillsBased' ORDER BY CustomRequestedDateTime ASC NULLS FIRST,SecondaryRoutingPriority ASC NULLS FIRST
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------
+
+
+1. Clean-up Repository
+2. Acknowledging the documentation to be accountable for the things going in Repository.
+3. Governance around the feature branch name, Commit Message.
+
+
+---------------------------------------------------------
